@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Waypoint : MonoBehaviour
+public interface iMovement
 {
-    
+  void Initialize(WaypointManager waypointManager);
 }

@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
     public float lifeTime = 5;
     private Rigidbody rb;
     public GameObject target;
-
+    private float dmg=0;
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -17,21 +17,31 @@ public class Bullet : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (target != null) {
+        if (target != null)
+        {
             rb.velocity = (target.transform.position - transform.position).normalized * speed;
         }
         else
         {
             Destroy(gameObject, .5f);
         }
-        
+
+    }
+    public void setdmg(float amt)
+    {
+        dmg = amt;
     }
     void OnCollisionEnter(Collision collision)
     {
-        
+
         if (collision.transform.parent.tag == "Enemy")
         {
-            collision.transform.parent.GetComponent<Enemy>().takeDamage(3);
+            collision.transform.parent.GetComponent<Enemy>().takeDamage(dmg);
+            Destroy(gameObject);
+        }
+        if (collision.transform.parent.tag == "SmartEnemy")
+        {
+            collision.transform.parent.GetComponent<SmartEnemy>().takeDamage(dmg);
             Destroy(gameObject);
         }
     }

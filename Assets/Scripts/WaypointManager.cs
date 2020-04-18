@@ -16,12 +16,6 @@ public class WaypointManager : MonoBehaviour
 
   public Waypoint GetNeWaypoint(int currentIndex)
   {
-        if (!waypoints[currentIndex].goal)
-            return waypoints[currentIndex++];
-        else
-        {
-            Debug.Log("Enemy has reached the Castle");
-            return null;
-        }
+    return waypoints[currentIndex++];
   }
 }

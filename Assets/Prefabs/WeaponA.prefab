@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6231101540727749382}
   - component: {fileID: 6231101540727749384}
   - component: {fileID: 6231101540727749385}
-  - component: {fileID: 3789804881077856631}
-  m_Layer: 9
+  - component: {fileID: 255509458064926661}
+  m_Layer: 0
   m_Name: WeaponA
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -70,8 +70,8 @@ MonoBehaviour:
   cost: 40
   bullet: {fileID: 908343121311076100, guid: 9cb9d581b39a0524a952cc706ecd131f, type: 3}
   target: {fileID: 0}
-  targets: []
-  RotationSpeed: 0.5
+  RotationSpeed: 1.5
+  dmg: 1
 --- !u!33 &6231101540727749384
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -94,6 +94,7 @@ MeshRenderer:
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -118,7 +119,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &3789804881077856631
+--- !u!114 &255509458064926661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -135,6 +136,6 @@ MonoBehaviour:
   rightChoice: {fileID: 0}
   bottomChoice: {fileID: 5648773123562151516, guid: 4c601a48346a727449b72d3a11aea8b9,
     type: 3}
-  goldValue: 0
-  range: 0
+  goldValue: 20
+  range: 5
   none: none

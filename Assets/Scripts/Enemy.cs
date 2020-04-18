@@ -1,21 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, iMovement
 {
     public Waypoint currentDestination;
     public WaypointManager waypointManager;
     private int currentIndexWaypoint = 0;
-    public float speed = 1;
-    public int scoreValue,hp,livesCost,goldValue;
+    public float speed = 1, StartHealth;
+    private float hp;
+    public int scoreValue, livesCost, goldValue;
     public bool dead = false;
+    public bool smart = false;
+    public Image healthBar;
     public void Initialize(WaypointManager waypointManager)
     {
         this.waypointManager = waypointManager;
         GetNextWaypoint();
         transform.position = currentDestination.transform.position; // Move to WP0
         GetNextWaypoint();
+        hp = StartHealth;
     }
 
     void Update()
@@ -44,9 +49,10 @@ public class Enemy : MonoBehaviour
         currentDestination = waypointManager.GetNeWaypoint(currentIndexWaypoint);
         currentIndexWaypoint++;
     }
-    public void takeDamage(int amt)
+    public void takeDamage(float amt)
     {
         hp -= amt;
+        healthBar.fillAmount = hp/StartHealth;
         if (hp <= 0)
         {
             death();

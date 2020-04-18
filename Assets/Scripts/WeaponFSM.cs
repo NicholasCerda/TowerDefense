@@ -4,16 +4,16 @@ using UnityEngine;
 
 public enum WeaponStates
 {
-  Idle,
-  Target,
-  Shoot
+    Idle,
+    Target,
+    Shoot
 }
 
 public enum WeaponParameters
 {
-  isTarget,
-  targetDistroyed,
-  newTarget
+    isTarget,
+    targetDistroyed,
+    newTarget
 }
 
 
@@ -26,7 +26,7 @@ public class WeaponFSM : MonoBehaviour
     public GameObject bullet;
     public GameObject target;
     //public GameObject[] targets;
-    public float RotationSpeed=1.5f;
+    public float RotationSpeed = 1.5f,dmg;
 
     //values for internal use
     private Quaternion _lookRotation;
@@ -56,9 +56,9 @@ public class WeaponFSM : MonoBehaviour
         {
             targetFinder();
         }
-        if (target!=null)
+        if (target != null)
         {
-            weapon.SetBool("isTarget",true);
+            weapon.SetBool("isTarget", true);
         }
         else
         {
@@ -78,6 +78,7 @@ public class WeaponFSM : MonoBehaviour
     {
         weapon.SetBool("isTarget", false);
         GameObject[] targets = GameObject.FindGameObjectsWithTag("Enemy");
+        GameObject[] stargets = GameObject.FindGameObjectsWithTag("SmartEnemy");
 
         foreach (GameObject nEnemy in targets)
         {
@@ -91,6 +92,23 @@ public class WeaponFSM : MonoBehaviour
             else if ((Vector3.Distance(target.transform.position, transform.position)) >= (Vector3.Distance(nEnemy.transform.position, transform.position)))
             {
                 target = nEnemy;
+            }
+        }
+        if (target == null)
+        {
+            foreach (GameObject nEnemy in stargets)
+            {
+                if (target == null)
+                {
+                    if (range >= (Vector3.Distance(nEnemy.transform.position, transform.position)))
+                    {
+                        target = nEnemy;
+                    }
+                }
+                else if ((Vector3.Distance(target.transform.position, transform.position)) >= (Vector3.Distance(nEnemy.transform.position, transform.position)))
+                {
+                    target = nEnemy;
+                }
             }
         }
         if (target != null)
@@ -113,6 +131,7 @@ public class WeaponFSM : MonoBehaviour
             newBullet.GetComponent<Bullet>().target = target;
             newBullet.transform.LookAt(target.transform);
             newBullet.GetComponent<Rigidbody>().velocity = newBullet.transform.forward * 5.0f;
+            newBullet.GetComponent<Bullet>().setdmg(dmg);
         }
         //newBullet.transform.rotation = transform.rotation;
     }

@@ -36,6 +36,9 @@ public class GuiScript : MonoBehaviour
                 }else if (hit.transform.parent.tag == "Enemy")
                 {
                     hit.collider.transform.parent.GetComponent<Enemy>().takeDamage(1);
+                }else if (hit.transform.parent.tag == "SmartEnemy")
+                {
+                    hit.collider.transform.parent.GetComponent<SmartEnemy>().takeDamage(1);
                 }
                 Debug.Log("You selected the " + hit.transform.name); // ensure you picked right object
             }
